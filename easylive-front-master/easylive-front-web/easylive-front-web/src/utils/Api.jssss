@@ -1,0 +1,121 @@
+import Request from "./Request";
+
+const Api = {
+    checkCode: "/account/checkCode",
+    login: "/account/login",
+    logout: "/account/loginOut",
+    register: "/account/register",
+    autoLogin: "/account/autoLogin",
+    sourcePath: "/api/file/getImage?sourceName=",
+    loadAllCategory: "/categoryInfo/loadAllCategoryInfo",
+    getCountInfo: "/account/getCountInfo",
+    //获取合集列表
+    loadRecommendVideo: "/video/loadCommendVideo",
+    loadVideo: "/video/loadVideo",
+    getVideoInfo: "/video/getVideoInfo",
+    loadVideoPList: "/video/loadVideoPList",
+    reportVideoPlayOnline: "/video/reportVideoPlayOnline",
+    getVideoResource: "/api/file/videoResource",
+    getVideoRecommend: "/video/getVideoRecommend",
+    loadHotVideoList: "/video/loadHotVideoList",
+    getHotWordTop: "/video/getHotWordTop",
+    search: "/video/search",
+    //用户信息
+    getUserInfo: "/ucenter/home/getUserInfo",
+    focus: "/ucenter/home/focus",
+    cancelFocus: "/ucenter/home/cancelFocus",
+    updateUserInfo: "/ucenter/home/updateUserInfo",
+    uhloadVideoList: "/ucenter/home/loadVideoList",
+    loadUserCollection: "/ucenter/home/loadUserCollection",
+    loadFocusList: "/ucenter/home/loadFocusList",
+    loadFansList: "/ucenter/home/loadFansList",
+    saveTheme: "/ucenter/home/saveTheme",
+    //弹幕
+    loadDanmu: "/danmu/loadDanmu",
+    postDanmu: "/danmu/postDanmu",
+    //图片上传
+    uploadImage: "/file/uploadImage",
+    //点赞，评论，投币，评论，收藏
+    userAction: "/userAction/doAction",
+    //评论
+    loadComment: "/comment/loadComment",
+    top: "/comment/top",
+    cancelTop: "/comment/cancelTop",
+    deleteComment: "/comment/deleteComment",
+    postComment: "/comment/postComment",
+    //系统设置
+    getSysSetting: "/sysSetting/getSysSetting",
+    //文件上传
+    preUploadVideo: "/file/preUploadVideo",
+    uploadVideo: "/file/uploadVideo",
+    delUploadVideo: "/file/delUploadVideo",
+    //发布视频
+    postVideo: "/ucenter/post/postVideo",
+    getVideoInfoByVideoId: "/ucenter/post/getVideoInfoByVideoId",
+    UcenterloadVideoList: "/ucenter/post/loadVideoList",
+    saveVideoInteraction: "/ucenter/post/saveVideoInteraction",
+    UcenterdelVideo: "/ucenter/post/delVideo",
+    getVideoCountInfo: "/ucenter/post/getVideoCountInfo",
+    //创作中心 评论、弹幕
+    czLoadAllVideo: "/ucenter/interaction/loadAllVideo",
+    czLoadComment: "/ucenter/interaction/loadComment",
+    czDelComment: "/ucenter/interaction/delComment",
+    czLoadDanmu: "/ucenter/interaction/loadDanmu",
+    czDelDanmu: "/ucenter/interaction/delDanmu",
+    //合集
+    loadVideoSeriesWithVideo: "/ucenter/series/loadVideoSeriesWithVideo",
+    loadVideoSeries: "/ucenter/series/loadVideoSeries",
+    SeriesloadAllVideo: "/ucenter/series/loadAllVideo",
+    saveVideoSeries: "/ucenter/series/saveVideoSeries",
+    saveSeriesVideo: "/ucenter/series/saveSeriesVideo",
+    changeVideoSeriesSort: "/ucenter/series/changeVideoSeriesSort",
+    getVideoSeriesDetail: "/ucenter/series/getVideoSeriesDetail",
+    delSeriesVideo: "/ucenter/series/delSeriesVideo",
+    delSeries: "/ucenter/series/delSeries",
+    //用户消息
+    getNoReadCount: "/message/getNoReadCount",
+    getNoReadCountGroup: "/message/getNoReadCountGroup",
+    readAll: "/message/readAll",
+    loadMessage: "/message/loadMessage",
+    delMessage: "/message/delMessage",
+    //观看历史
+    loadHistory: "/history/loadHistory",
+    cleanAllHistory: "/history/cleanAllHistory",
+    delHistory: "/history/delHistory",
+    //统计数据
+    getActualTimeStatisticsInfo: "/statistics/getActualTimeStatisticsInfo",
+    getWeekStatisticsInfo: "/statistics/getWeekStatisticsInfo",
+}
+
+//上传封面
+const uploadImage = async (file, createThumbnail = false) => {
+    let result = await Request({
+        url: Api.uploadImage,
+        params: {
+            file,
+            createThumbnail
+        },
+    })
+    if (!result) {
+        return;
+    }
+    return result.data;
+}
+
+const doUserAction = async (config, callback) => {
+    let result = await Request({
+        url: Api.userAction,
+        params: config,
+        showLoading: true,
+    })
+    if (!result) {
+        return;
+    }
+    callback()
+}
+
+export {
+    Api,
+    uploadImage,
+    doUserAction
+}
